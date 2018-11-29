@@ -1,7 +1,6 @@
 require_relative '../../../app/api'
 require 'rack/test'
 module ExpenseTracker 
-	RecordResult = Struct.new(:sucess?, :expense_id, :error_message)
 	RSpec.describe API  do 
 		include Rack::Test::Methods
 		def app
