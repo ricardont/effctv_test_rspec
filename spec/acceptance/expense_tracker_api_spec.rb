@@ -1,5 +1,6 @@
 require 'rack/test'
 require 'json'
+
 require_relative '../../app/api'
 module ExpenseTracker
   RSpec.describe 'Expense Tracker API' do
@@ -16,7 +17,6 @@ module ExpenseTracker
       expense.merge('id' => parsed['expense_id'])
     end
     it "record submitted expenses" do
-      pending 'Need to persist expenses'  
       coffee = post_expense('payee' => 'starbucks', 'amount' => 5.75, 'date' => '2017-06-10')
       zoo = post_expense('payee' => 'Zoo', 'amount' => 15.25, 'date' => '2017-06-10')
       groceries  = post_expense('payee' => 'Whole Foods', 'amount' => 95.20, 'date' => '2017-06-11')

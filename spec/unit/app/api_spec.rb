@@ -7,11 +7,9 @@ module ExpenseTracker
 			API.new(ledger: ledger)
 		end
 		let(:ledger) { instance_double('ExpenseTracker:Ledger') }
-
-		describe 'POST/expenses' do
-
+    let(:expense) { {'some' => 'data'} }
+		describe 'POST /expenses' do
 			context 'When the expense is succesfully recorded' do
-				expense = {'some' => 'data'}
 			  before do
 					allow(ledger).to receive(:record).with(expense).and_return(RecordResult.new(true, 417, nil))
 					post '/expenses', JSON.generate(expense)
@@ -26,9 +24,8 @@ module ExpenseTracker
 				end
 			end	
 			context 'when the expense fail validation' do
-				expense = {'some' => 'data'}
 			  before do
-					allow(ledger).to receive(:record).with(expense).and_return(RecordResult.new(false, 422, 'expense incomplete'))
+					allow(ledger).to receive(:record).with(expense).and_return(RecordResult.new(false, 422,'expense incomplete'))
 					post '/expenses', JSON.generate(expense)
 			  end
 				it 'returns an error message' do
